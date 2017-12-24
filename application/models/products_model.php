@@ -42,27 +42,27 @@ class Products_model extends CI_Model {
 
     // product cart
     function product_cart(){
-        if(!empty($this->session->userdata())){
-            
-            $arr = array();
-            $where = "";
-            $no = 1;
-            foreach($this->session->userdata() as $k => $v){
-                if($k[0] == 'k'){
-                    if($no == 1){
-                        $where .= "id = ".ltrim($k, 'k')."";
-                    }else{
-                        $where .= " OR id = ".ltrim($k, 'k')."";
-                    }
-                    $no++;
+        $arr = array();
+        $where = "";
+        $no = 1;
+        foreach($this->session->userdata() as $k => $v){
+            if($k[0] == 'k'){
+                if($no == 1){
+                    $where .= "id = ".ltrim($k, 'k')."";
+                }else{
+                    $where .= " OR id = ".ltrim($k, 'k')."";
                 }
+                $no++;
             }
+        }
+
+        if($where == !null){
             $this->db->where($where);
             return $this->db->get('produk');
-
         }else{
             return null;
         }
+
     }
 }
 

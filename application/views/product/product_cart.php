@@ -67,10 +67,17 @@
                                 <td><?php echo $no; ?></td>
                                 <td><?php echo $item->nama ?></td>
                                 <td>Rp. <?php echo number_format($item->harga); ?></td>
-                                <td><?php //echo $jumlah; ?></td>
-                                <td>Rp. <?php //echo number_format($subharga); ?></td>
+                                    
+                                <?php
+                                foreach($this->session->userdata() as $k => $v){
+                                    if(ltrim($k, 'k') == $item->id){ ?>
+                                        <td><?php echo $v; ?></td>
+                                        <td>Rp. <?php echo number_format(($v * $item->harga)); ?></td> <?php
+                                    }
+                                }
+                                ?>
                                 <td>
-                                    <a href="hapuskeranjang.php?id=<?php //echo($id_produk) ?>" class="btn btn-danger btn-xs">Hapus</a>
+                                    <a href="<?php echo base_url(); ?>product/cart_delete/<?php echo $item->id ?>" class="btn btn-danger btn-xs">Hapus</a>
                                 </td>
                                 </tr>
 
@@ -80,7 +87,7 @@
                         </tbody>
                         </table>
 
-                        <a href="index.php?page=index#belanja" class="btn btn-default">Lanjutkan Belanja</a>
+                        <a href="<?php echo base_url(); ?>product" class="btn btn-default">Lanjutkan Belanja</a>
                         <a href="checkout.php" class="btn btn-primary">Checkout</a>
                     
                     <?php
@@ -92,6 +99,25 @@
         </div>
     </div>
 
+    <!-- modal message -->
+    <?php
+    if(!empty($this->session->flashdata('message'))){ ?>
+        <div id="indicator_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p><?php echo $this->session->flashdata('message') ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div> <?php
+    }
+    ?>
+    
+
     <!-- footer -->
     <?php $this->load->view('component/footer'); ?>
 
@@ -100,5 +126,12 @@
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
     <script src="<?php echo base_url(); ?>assets/ItemSlider/js/modernizr.custom.63321.js"></script>
     <script src="<?php echo base_url(); ?>assets/ItemSlider/js/jquery.catslider.js"></script>
+    <script>
+        $(document).ready(function(){
+            if($("#indicator_modal").length){
+                $("#indicator_modal").modal('show');
+            }
+        });
+    </script>
 </body>
 </html>

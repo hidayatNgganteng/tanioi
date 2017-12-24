@@ -51,13 +51,26 @@ class Product extends CI_Controller {
             $this->session->set_userdata($arr);
         }
 
-        print_r($this->session->userdata());
+        $data['allProducts'] = $this->products_model->getAllProduct();
+        $data['product_cart'] = $this->products_model->product_cart();
+        $this->session->set_flashdata('message', 'Data telah ditambahkan');
+        $this->load->view('product/product_cart', $data);
     }
 
     // product cart
     function cart(){
         $data['allProducts'] = $this->products_model->getAllProduct();
         $data['product_cart'] = $this->products_model->product_cart();
-        $this->load->view('product/product_cart', $data);   
+        $this->session->set_flashdata('message');
+        $this->load->view('product/product_cart', $data);
+    }
+
+    // delete cart
+    function cart_delete($id){
+        $this->session->unset_userdata('k'.$id);
+        $data['allProducts'] = $this->products_model->getAllProduct();
+        $data['product_cart'] = $this->products_model->product_cart();
+        $this->session->set_flashdata('message', 'Data telah dihapus');
+        $this->load->view('product/product_cart', $data);
     }
 }

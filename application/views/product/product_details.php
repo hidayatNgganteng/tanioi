@@ -48,7 +48,7 @@
                                     <p for="deskripsi"><?php echo $productById->deskripsi ?></p>
                                     <div class="form-group">
                                         <a href="<?php echo base_url(); ?>product" class="btn btn-danger">Kembali</a>
-                                        <a href="#" class="btn btn-success" role="button">Beli Sekarang</a> 
+                                        <a href="<?php echo base_url(); ?>product/buy/<?php echo $productById->id ?>" class="btn btn-success" role="button">Beli Sekarang</a> 
                                     </div>
                                     </form>
                                 </div>
