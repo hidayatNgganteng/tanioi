@@ -15,7 +15,7 @@
                 <?php //if (isset($_SESSION["sesi_login"])): ?>
                 <!-- <li><a href="logout.php">Logout</a></li> -->
             <?php //else: ?>
-                <li><a href="loginform.php">Login</a></li>
+                <li><a href="<?php echo base_url(); ?>user">Login</a></li>
             <?php //endif ?>
                 <li><a href="signup/signup.php">Signup</a></li>
             </ul>
@@ -34,7 +34,7 @@
         <div class="col-md-6">
                 <h2>Toko Online Pertanian </h2>
                 <p>Menyediakan Berbagai Produk Peningkat Kualitas Hasil Tani.</p>
-                <a href="#belanja" class="btn btn-danger btn-lg">BELANJA SEKARANG</a>
+                <a href="<?php echo base_url(); ?>product" class="btn btn-danger btn-lg">BELANJA SEKARANG</a>
             </div>
         <div class="col-md-6">
             <div id="myCarousel" class="carousel slide" data-ride="carousel" style="float: right; margin-right: 50px">

@@ -73,4 +73,10 @@ class Product extends CI_Controller {
         $this->session->set_flashdata('message', 'Data telah dihapus');
         $this->load->view('product/product_cart', $data);
     }
+
+    // checkout
+    function checkout(){
+        $data['allProducts'] = $this->products_model->getAllProduct();
+        $this->load->view('product/product_checkout', $data);
+    }
 }

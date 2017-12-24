@@ -76,6 +76,24 @@
         </div>
     </div>
 
+    <!-- modal message -->
+    <?php
+    if(!empty($this->session->flashdata('message'))){ ?>
+        <div id="indicator_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p><?php echo $this->session->flashdata('message') ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div> <?php
+    }
+    ?>
+
     <!-- footer -->
     <?php $this->load->view('component/footer'); ?>
 
@@ -84,5 +102,12 @@
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
     <script src="<?php echo base_url(); ?>assets/ItemSlider/js/modernizr.custom.63321.js"></script>
     <script src="<?php echo base_url(); ?>assets/ItemSlider/js/jquery.catslider.js"></script>
+    <script>
+        $(document).ready(function(){
+            if($("#indicator_modal").length){
+                $("#indicator_modal").modal('show');
+            }
+        });
+    </script>
 </body>
 </html>

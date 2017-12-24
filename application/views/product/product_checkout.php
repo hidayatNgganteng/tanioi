@@ -34,66 +34,19 @@
                 <div>
                     <ol class="breadcrumb">
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                        <li class="active">Keranjang Belanja</li>
+                        <li class="active">Checkout</li>
                     </ol>
                 </div>
                 <section class="konten">
-                <div class="container">
-                    <h1 style="color: white;">Keranjang Belanja</h1>
-                    <hr>
-                    <?php
-                    if($product_cart == null){
-
-                        echo "<h4>Empty data</H4>";
-
-                    }else{ ?>
-
-                        <table class="table table-bordered" style="width: auto; background-color: white;">
-                        <thead>
-                            <tr>
-                            <th>No</th>
-                            <th>Produk</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>SubHarga</th>
-                            <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            foreach($product_cart->result() as $item){ ?>
-                                <tr>
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $item->nama ?></td>
-                                <td>Rp. <?php echo number_format($item->harga); ?></td>
-                                    
-                                <?php
-                                foreach($this->session->userdata() as $k => $v){
-                                    if(ltrim($k, 'k') == $item->id){ ?>
-                                        <td><?php echo $v; ?></td>
-                                        <td>Rp. <?php echo number_format(($v * $item->harga)); ?></td> <?php
-                                    }
-                                }
-                                ?>
-                                <td>
-                                    <a href="<?php echo base_url(); ?>product/cart_delete/<?php echo $item->id ?>" class="btn btn-danger btn-xs">Hapus</a>
-                                </td>
-                                </tr>
-
-                            <?php $no++;
-                            }
-                            ?>
-                        </tbody>
-                        </table>
-
-                        <a href="<?php echo base_url(); ?>product" class="btn btn-default">Lanjutkan Belanja</a>
-                        <a href="checkout.php" class="btn btn-primary">Checkout</a>
-                    
-                    <?php
-                    }
-                    ?>
-                </div>   
+                    <div class="alert alert-success" role="alert">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span><br>
+                        <b>Silakan transfer ke Adot simotupang bung</b><br>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    </div>
                 </section>
             </div>
         </div>
