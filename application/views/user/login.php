@@ -163,7 +163,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <p style="color: #000000; font-size: 20px; color: red"><?php echo $this->session->flashdata('message') ?></p>
+                        <p style="color: #000000; font-size: 18px"><?php echo $this->session->flashdata('message') ?></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>

@@ -88,7 +88,17 @@
                         </table>
 
                         <a href="<?php echo base_url(); ?>product" class="btn btn-default">Lanjutkan Belanja</a>
-                        <a href="checkout.php" class="btn btn-primary">Checkout</a>
+                        <?php
+                        if(empty($this->session->userdata('username'))){ ?>
+
+                            <a href="<?php echo base_url(); ?>user" class="btn btn-primary">Checkout</a>
+
+                        <?php }else{ ?>
+
+                            <a href="<?php echo base_url(); ?>product/checkout" class="btn btn-primary">Checkout</a> <?php
+                            
+                        } ?>
+                        
                     
                     <?php
                     }

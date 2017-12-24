@@ -12,12 +12,17 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <?php //if (isset($_SESSION["sesi_login"])): ?>
-                <!-- <li><a href="logout.php">Logout</a></li> -->
-            <?php //else: ?>
-                <li><a href="<?php echo base_url(); ?>user">Login</a></li>
-            <?php //endif ?>
-                <li><a href="signup/signup.php">Signup</a></li>
+                <?php 
+                if(empty($this->session->userdata('username'))){ ?>
+
+                    <li><a href="<?php echo base_url(); ?>user">Login</a></li>
+
+                <?php }else{ ?>
+
+                    <li><a href="<?php echo base_url(); ?>user/logout">Logout</a></li> <?php
+
+                } ?>
+                <li><a href="<?php echo base_url(); ?>user/signup">Signup</a></li>
             </ul>
             <form method="POST" action="<?php echo base_url(); ?>product/search" class="navbar-form navbar-right" role="search">
                 <div class="form-group">
