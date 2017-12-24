@@ -10,8 +10,13 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url(); ?>assets/ItemSlider/css/main-style.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" />
+    <style>
+        body{
+            background:url("<?php echo base_url(); ?>assets/img/grass1.jpg");
+        }
+    </style>
 </head>
-<body background="<?php echo base_url(); ?>assets/img/grass1.jpg">
+<body>
     
     <div class="container" style="width:900px; padding-top: 15px;">
         <div class="jumbotron" style="background-color:#000; opacity:0.8; filter:alpha(opacity=40);">

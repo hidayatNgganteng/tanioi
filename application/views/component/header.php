@@ -40,10 +40,10 @@
             <div id="myCarousel" class="carousel slide" data-ride="carousel" style="float: right; margin-right: 50px">
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="assets/img/hay.png" alt="" style="height: 200px;">
+                    <img src="<?php echo base_url(); ?>assets/img/hay.png" alt="" style="height: 200px;">
                 </div>
                 <div class="item">
-                    <img src="assets/img/trac.png" alt="" style="height: 200px;">
+                    <img src="<?php echo base_url(); ?>assets/img/trac.png" alt="" style="height: 200px;">
                 </div>           
             </div>
         </div>

@@ -42,27 +42,27 @@ class Products_model extends CI_Model {
 
     // product cart
     function product_cart(){
-        // if(!empty($this->session->userdata())){
+        if(!empty($this->session->userdata())){
             
-        //     $arr = array();
-        //     foreach($this->session->userdata() as $k => $v){
-        //         $e = array();
-        //         $e['id'] = $k;
+            $arr = array();
+            $where = "";
+            $no = 1;
+            foreach($this->session->userdata() as $k => $v){
+                if($k[0] == 'k'){
+                    if($no == 1){
+                        $where .= "id = ".ltrim($k, 'k')."";
+                    }else{
+                        $where .= " OR id = ".ltrim($k, 'k')."";
+                    }
+                    $no++;
+                }
+            }
+            $this->db->where($where);
+            return $this->db->get('produk');
 
-        //         array_push($arr, $e);
-        //     }
-
-        //     echo "hidayat";
-        //     print_r($arr);
-        //     // $this->db->where($e);
-        //     // return $this->db->get('produk');
-
-        // }else{
-        //     return null;
-        // }
-        // foreach(){
-
-        // }
+        }else{
+            return null;
+        }
     }
 }
 
