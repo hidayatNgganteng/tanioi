@@ -93,7 +93,7 @@ class Product extends CI_Controller {
 
         // jk sebelumnya ada transaksi yang belum selesai
         if($transactionByBuyer->num_rows() > 0){
-            $this->session->set_flashdata('message','Produk telah ditambahkan dengan keranjang sebelumnya. Untuk membatalkan silakan menuju menu <Transaksi Anda>');
+            $this->session->set_flashdata('message','Produk telah ditambahkan dengan keranjang sebelumnya. Untuk membatalkan silakan menuju menu Transaksi Anda');
             // $this->products_model->transactionDeleteActive($currentUser->row()->id);
         }
         
