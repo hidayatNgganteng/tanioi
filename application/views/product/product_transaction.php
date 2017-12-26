@@ -125,11 +125,11 @@
                                         <td><?php echo $v->status ?></td> <?php
                                     
                                     if($v->status == 'Menunggu Konfirmasi'){ ?>
-                                        <td><a href='<?php echo base_url(); ?>product/batal' class='btn btn-danger btn-xs'>Batal</a></td>
-                                        <td><a href='<?php echo base_url(); ?>product/batal' class='btn btn-success btn-xs'>Selesai</a></td> <?php
+                                        <td><a href='<?php echo base_url(); ?>product/cancel/<?php echo $v->id_transaksi ?>' class='btn btn-danger btn-xs'>Batal</a></td>
+                                        <td><a href='<?php echo base_url(); ?>product/done/<?php echo $v->id_transaksi ?>' class='btn btn-success btn-xs'>Selesai</a></td> <?php
                                     }else if($v->status == 'Barang Sedang Dikirim'){ ?>
                                         <td></td>
-                                        <td><a href='#' class='btn btn-success btn-xs'>Selesai</a></td> <?php
+                                        <td><a href='<?php echo base_url(); ?>product/done/<?php echo $v->id_transaksi ?>' class='btn btn-success btn-xs'>Selesai</a></td> <?php
                                     }else{ ?>
                                         <td></td>
                                         <td></td> <?php

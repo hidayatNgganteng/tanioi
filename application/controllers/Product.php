@@ -157,4 +157,18 @@ class Product extends CI_Controller {
         $data['getAllTransaction'] = $this->products_model->getAllTransaction();
         $this->load->view('product/product_transaction', $data);
     }
+
+    // cancel
+    function cancel($id){
+        $this->products_model->cancel($id);
+        $this->session->set_flashdata('message','Barang telah dibatalkan');
+        redirect('product/transaction');
+    }
+
+    // done
+    function done($id){
+        $this->products_model->done($id);
+        $this->session->set_flashdata('message','Terimakasih atas kepercayaan anda berbelanja di toko kami');
+        redirect('product/transaction');
+    }
 }

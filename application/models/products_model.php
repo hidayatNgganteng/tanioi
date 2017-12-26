@@ -117,6 +117,30 @@ class Products_model extends CI_Model {
     function getAllTransaction(){
         return $this->db->get('transaksi');
     }
+
+    // cancel
+    function cancel($id){
+        $arr = array(
+            'id_transaksi' => $id
+        );
+        $arrUpdate = array(
+            'status' => 'Dibatalkan Oleh Pembeli'
+        );
+        $this->db->where($arr);
+        return $this->db->update('transaksi', $arrUpdate);
+    }
+
+    // done
+    function done($id){
+        $arr = array(
+            'id_transaksi' => $id
+        );
+        $arrUpdate = array(
+            'status' => 'Barang Telah Sampai'
+        );
+        $this->db->where($arr);
+        return $this->db->update('transaksi', $arrUpdate);
+    }
 }
 
 ?>
