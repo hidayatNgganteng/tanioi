@@ -130,7 +130,8 @@ class Products_model extends CI_Model {
             'id_transaksi' => $id
         );
         $arrUpdate = array(
-            'status' => 'Dibatalkan Oleh Pembeli'
+            'status' => 'Dibatalkan Oleh Pembeli',
+            'tgl_sampai' => '-'
         );
         $this->db->where($arr);
         return $this->db->update('transaksi', $arrUpdate);
@@ -142,7 +143,8 @@ class Products_model extends CI_Model {
             'id_transaksi' => $id
         );
         $arrUpdate = array(
-            'status' => 'Barang Telah Sampai'
+            'status' => 'Barang Telah Sampai',
+            'tgl_sampai' => date('d-m-Y')
         );
         $this->db->where($arr);
         return $this->db->update('transaksi', $arrUpdate);

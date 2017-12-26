@@ -66,7 +66,8 @@ class Admin_model extends CI_Model {
             'id_transaksi' => $id
         );
         $arrUpdate = array(
-            'status' => 'Dibatalkan Oleh Admin'
+            'status' => 'Dibatalkan Oleh Admin',
+            'tgl_sampai' => '-'
         );
         $this->db->where($arr);
         return $this->db->update('transaksi', $arrUpdate);
@@ -78,7 +79,8 @@ class Admin_model extends CI_Model {
             'id_transaksi' => $id
         );
         $arrUpdate = array(
-            'status' => 'Barang Sedang Dikirim'
+            'status' => 'Barang Sedang Dikirim',
+            'tgl_sampai' => date('d-m-Y')
         );
         $this->db->where($arr);
         return $this->db->update('transaksi', $arrUpdate);
