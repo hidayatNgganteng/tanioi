@@ -14,6 +14,7 @@ class Product extends CI_Controller {
 	{
         $category = urldecode($category);
         $data['allProducts'] = $this->products_model->getAllProduct();
+        $data['currentUser'] = $this->users_model->currentUser();
         $data['productByCategory'] = $this->products_model->productByCategory($category);
         if($category == 'all'){
             $data['category'] = 'Semua produk';
@@ -34,6 +35,7 @@ class Product extends CI_Controller {
         $keyword = $this->input->post('keyword');
         $data['allProducts'] = $this->products_model->getAllProduct();
         $data['productByKeyword'] = $this->products_model->productByKeyword($keyword);
+        $data['currentUser'] = $this->users_model->currentUser();
         $data['keyword'] = $keyword;
         $this->load->view('product/product_search', $data);
     }
