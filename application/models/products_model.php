@@ -10,12 +10,14 @@ class Products_model extends CI_Model {
     // Product by category
     function productByCategory($category){
         if($category == 'all'){
+            $this->db->order_by('id','desc');
             return $this->db->get('produk');
         }else{
             $key = array(
                 'kategori' => $category
             );
             $this->db->where($key);
+            $this->db->order_by('id','desc');
             return $this->db->get('produk');
         }
     }
