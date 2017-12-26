@@ -14,6 +14,52 @@
         body{
             background:url("<?php echo base_url(); ?>assets/img/grass1.jpg");
             background-attachment:fixed;
+        },
+        #wrapshopcart{
+            width:auto;
+            margin: auto;
+            padding:30px;
+            background:#fff;}
+        table{
+            margin:auto; 
+            border:1px solid #eee;
+            width:auto; 
+            border-collapse: separate;
+            border-spacing:0;}
+        table th{
+            background:#fafafa; 
+            border:none; 
+            padding:20px ; 
+            font-weight:normal;
+            text-align:left;}
+        table td{
+            background:#fff; 
+            border:none; 
+            padding:12px  20px; 
+            font-weight:normal;
+            text-align:left; 
+            border-top:1px solid #eee;}
+        table tr.total td{
+            font-size:1.5em;}
+        .btnsubmit{
+            display:inline-block;
+            padding:10px;
+            border:1px solid #ddd;
+            background:#eee;
+            color:#000;
+            text-decoration:none;
+            margin:2em 0;}
+        form{
+            margin:2em 0 0 0;}
+        label{
+            display:inline-block;
+            width:auto;}
+        .kosong{
+            position: absolute; left:0; top: 0; width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -33,78 +79,87 @@
             <div class="col-md-9">
                 <div>
                     <ol class="breadcrumb">
-                        <li><a href="<?php echo base_url(); ?>">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li class="active">Keranjang Belanja</li>
                     </ol>
                 </div>
-                <section class="konten">
-                <div class="container">
-                    <h1 style="color: white;">Keranjang Belanja</h1>
-                    <hr>
+                <div id="wrapshopcart" style="background: #ffffff; padding: 30px 30px">
                     <?php
                     if($product_cart == null){
 
                         echo "<h4>Empty data</H4>";
 
                     }else{ ?>
-
-                        <table class="table table-bordered" style="width: auto; background-color: white;">
-                        <thead>
+                        <h3>Berikut adalah data lengkap Anda : </h3>
+                        <label>Nama Lengkap : <?php echo $currentUser->row()->nama; ?> </label>
+                        <p></p>
+                        <label>Email : <?php echo $currentUser->row()->email; ?> </label>
+                        <p></p>
+                        <label>No Telepon : <?php echo $currentUser->row()->telepon; ?></label>
+                        <p></p>
+                        <label>Alamat : <?php echo $currentUser->row()->alamat; ?></label>
+                        <h3>Produk Yang Anda Beli : </h3>
+                        <table>
+                            <form action="<?php echo base_url(); ?>product/checkout" method="POST" class="form-inline" enctype="multipart/form-data">
                             <tr>
-                            <th>No</th>
-                            <th>Produk</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>SubHarga</th>
-                            <th>Aksi</th>
+                                <th>Produk</th>
+                                <th>Stok</th>
+                                <th>Quantity</th>
+                                <th>Harga</th>
+                                <th>Aksi</th>
                             </tr>
-                        </thead>
-                        <tbody>
                             <?php
-                            $no = 1;
-                            foreach($product_cart->result() as $item){ ?>
-                                <tr>
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $item->nama ?></td>
-                                <td>Rp. <?php echo number_format($item->harga); ?></td>
-                                    
-                                <?php
-                                foreach($this->session->userdata() as $k => $v){
-                                    if(ltrim($k, 'k') == $item->id){ ?>
-                                        <td><?php echo $v; ?></td>
-                                        <td>Rp. <?php echo number_format(($v * $item->harga)); ?></td> <?php
-                                    }
-                                }
-                                ?>
-                                <td>
-                                    <a href="<?php echo base_url(); ?>product/cart_delete/<?php echo $item->id ?>" class="btn btn-danger btn-xs">Hapus</a>
-                                </td>
-                                </tr>
-
-                            <?php $no++;
+                            foreach($product_cart->result() as $i => $item){ ?>
+                                <tr style="position: relative">
+                                    <td>
+                                        <?php echo $item->nama ?>
+                                        <input name="nama_produk<?php echo $i+1 ?>" type="hidden" value="<?php echo $item->nama ?>" />
+                                        <input name="id_produk<?php echo $i+1 ?>" type="hidden" value="<?php echo $item->id ?>" />
+                                        <input name="stok_sekarang<?php echo $i+1 ?>" type="hidden" value="<?php echo $item->stok ?>" />
+                                    </td>
+                                    <td><?php echo $item->stok ?></td>
+                                    <?php
+                                    if($item->stok == 0){ ?>
+                                        <select name="jumlah<?php echo $i+1 ?>" required style="display: none">
+                                            <option value="0">0</option>
+                                        </select>
+                                        <td style="position: relative; background: rgba(0,0,0,0.5)">
+                                            <div class="kosong">Stok kosong</div>
+                                        </td> <?php
+                                    }else{ ?>
+                                        <td>
+                                            <select name="jumlah<?php echo $i+1 ?>" required>
+                                                <?php
+                                                for($stock = 1; $stock <= $item->stok; $stock++){ ?>
+                                                    <option value="<?php echo $stock ?>"><?php echo $stock ?></option> <?php
+                                                } ?>
+                                            </select>
+                                        </td> <?php
+                                    } ?>
+                                    <td>
+                                        Rp. <?php echo number_format($item->harga); ?>
+                                        <input name="harga<?php echo $i+1 ?>" type="hidden" value="<?php echo $item->harga ?>" />
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo base_url(); ?>product/cart_delete/<?php echo $item->id ?>" class="btn btn-danger btn-xs">Hapus</a>
+                                    </td>
+                                </tr> <?php
                             }
                             ?>
-                        </tbody>
                         </table>
-
+                        <table>
+                        <h3>Metode Pembayaran Yang Dipilih :</h3>
+                        <select class="form-control" name="metode" required>
+                        <option value="BRI">Transfer Bank BRI</option>
+                        <option value="Mandiri">Transfer Bank Mandiri</option>
+                        </select>
+                        <hr>
                         <a href="<?php echo base_url(); ?>product" class="btn btn-default">Lanjutkan Belanja</a>
-                        <?php
-                        if(empty($this->session->userdata('username'))){ ?>
-
-                            <a href="<?php echo base_url(); ?>user" class="btn btn-primary">Checkout</a>
-
-                        <?php }else{ ?>
-
-                            <a href="<?php echo base_url(); ?>product/checkout" class="btn btn-primary">Checkout</a> <?php
-                            
-                        } ?>
-                        
-                    
-                    <?php
-                    }
-                    ?>
-                </div>   
-                </section>
+                        <button type="submit" class="btn btn-primary" name="lanjut" value="Lanjutkan">Checkout</button>
+                        </form>
+                        </table> <?php
+                    } ?>
+                </div>
             </div>
         </div>
     </div>

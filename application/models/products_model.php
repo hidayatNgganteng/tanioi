@@ -64,6 +64,59 @@ class Products_model extends CI_Model {
         }
 
     }
+
+    // transaction proccess
+    function transaction_proccess($arr){
+        return $this->db->insert('transaksi', $arr);
+    }
+
+    // reduce stock
+    function reduce_stock($count, $id){
+        $arr = array(
+            'id' => $id
+        );
+
+        $arrUpdate = array(
+            'stok' => $count
+        );
+        $this->db->where($arr);
+        return $this->db->update('produk', $arrUpdate);
+    }
+
+    // payment
+    function payment($id_user){
+        $arr = array(
+            'id_pembeli' => $id_user,
+            'status' => 'Menunggu Konfirmasi'
+        );
+        $this->db->where($arr);
+        return $this->db->get('transaksi');
+    }
+
+    // transaction by buyer
+    function transactionByBuyer($id_pembeli){
+        $arr = array(
+            'id_pembeli' => $id_pembeli,
+            'status' => 'Menunggu Konfirmasi'
+        );
+        $this->db->where($arr);
+        return $this->db->get('transaksi');
+    }
+
+    // transaction Delete Active
+    function transactionDeleteActive($id_pembeli){
+        $arr = array(
+            'id_pembeli' => $id_pembeli,
+            'status' => 'Menunggu Konfirmasi'
+        );
+        $this->db->where($arr);
+        return $this->db->delete('transaksi');
+    }
+
+    // get all transaction
+    function getAllTransaction(){
+        return $this->db->get('transaksi');
+    }
 }
 
 ?>

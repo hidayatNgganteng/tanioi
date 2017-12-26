@@ -54,14 +54,20 @@
     </a>
     <ul class="list-group">
         <li class="list-group-item">
-        <a href="<?php echo base_url(); ?>product/cart">Keranjang Belanja</li></a>
-    </ul>
-</div>
-<div>
-    <a href="#" class="list-group-item active list-group-item-success" style="background-color:#000; border: solid #000; opacity:0.8; filter:alpha(opacity=40);">Profile
-    </a>
-    <ul class="list-group">
-
-        <li class="list-group-item">About Us</li>
+            <?php
+            if(empty($this->session->userdata('username'))){ ?>
+                <a href="<?php echo base_url(); ?>user/index/alert">Keranjang Belanja</a>
+            <?php }else{ ?>
+                <a href="<?php echo base_url(); ?>product/cart">Keranjang Belanja</a> <?php
+            } ?>
+        </li>
+        <li class="list-group-item">
+            <?php
+            if(empty($this->session->userdata('username'))){ ?>
+                <a href="<?php echo base_url(); ?>user/index/alert">Transaksi Anda</a>
+            <?php }else{ ?>
+                <a href="<?php echo base_url(); ?>product/transaction">Transaksi Anda</a> <?php
+            } ?>
+        </li>
     </ul>
 </div>

@@ -21,7 +21,7 @@
     <!-- header -->
     <?php $this->load->view('component/header'); ?>
 
-    <div class="container" style="margin-top: 10px">
+    <div class="container" style="margin-top: 10px" id="product">
         <div class="row">
             <div class="col-md-3">
                 

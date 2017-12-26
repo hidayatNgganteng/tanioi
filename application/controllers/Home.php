@@ -7,11 +7,13 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('products_model');
+		$this->load->model('users_model');
 	}
 
 	public function index()
 	{
 		$data['allProducts'] = $this->products_model->getAllProduct();
+		$data['currentUser'] = $this->users_model->currentUser();
 		$this->load->view('home', $data);
 	}
 }

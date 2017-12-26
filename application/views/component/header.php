@@ -12,18 +12,28 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <?php 
-                if(empty($this->session->userdata('username'))){ ?>
+                <?php
+                if(!empty($this->session->userdata('username'))){ ?>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='<?php echo base_url(); ?>user/view'>Lihat Profil</a></li>
+                            <li><a href='<?php echo base_url(); ?>user/edit'>Edit Profil</a></li>
+                            <li><a href="<?php echo base_url(); ?>user/logout">Logout</a></li>
+                        </ul>
+                    </li> <?php
+                }else{ ?>
+                    <li><a href="<?php echo base_url(); ?>user">Login</a></li> <?php
+                }
 
-                    <li><a href="<?php echo base_url(); ?>user">Login</a></li>
-
-                <?php }else{ ?>
-
-                    <li><a href="<?php echo base_url(); ?>user/logout">Logout</a></li> <?php
-
+                if(!empty($this->session->userdata('username'))){ ?>
+                    <li style="padding-right: 60px;"></li> <?php
+                }else{ ?>
+                    <li><a href="<?php echo base_url(); ?>user/signup">Signup</a></li> <?php
                 } ?>
-                <li><a href="<?php echo base_url(); ?>user/signup">Signup</a></li>
             </ul>
+
             <form method="POST" action="<?php echo base_url(); ?>product/search" class="navbar-form navbar-right" role="search">
                 <div class="form-group">
                     <input type="text" name="keyword" placeholder="Cari nama produk..." class="form-control">
@@ -39,7 +49,7 @@
         <div class="col-md-6">
                 <h2>Toko Online Pertanian </h2>
                 <p>Menyediakan Berbagai Produk Peningkat Kualitas Hasil Tani.</p>
-                <a href="<?php echo base_url(); ?>product" class="btn btn-danger btn-lg">BELANJA SEKARANG</a>
+                <a href="<?php echo base_url(); ?>product#product" class="btn btn-danger btn-lg">BELANJA SEKARANG</a>
             </div>
         <div class="col-md-6">
             <div id="myCarousel" class="carousel slide" data-ride="carousel" style="float: right; margin-right: 50px">

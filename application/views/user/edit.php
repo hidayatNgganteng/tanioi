@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up</title>
+    <title>Edit Profil</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/signup/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/signup/assets/font-awesome/css/font-awesome.min.css">
@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 description-title">
-                    <h2>Registrasi Akun</h2>
+                    <h2>Edit Profil</h2>
                 </div>
             </div>
         </div>
@@ -43,44 +43,53 @@
             <div class="row">
                 <div class="col-sm-12 msf-form">
                     
-                    <form action="<?php echo base_url(); ?>user/signup_proccess" method="POST" class="form-inline" enctype="multipart/form-data">
+                    <form action="<?php echo base_url(); ?>user/edit_proccess/<?php echo $currentUser->row()->id ?>" method="POST" class="form-inline" enctype="multipart/form-data">
                         
                         <fieldset>
                             <h4>Data Diri <span class="step">(Step 1 / 2)</span></h4>
                             <div class="form-group">
                                 <label for="nama">Nama Lengkap:</label><br>
-                                <input type="text" name="nama" class="nama form-control" id="nama" required> 
+                                <input type="text" name="nama" class="nama form-control" id="nama" value="<?php echo $currentUser->row()->nama ?>" required> 
                             </div>
                             <div class="form-group">
                                 <p>Jenis Kelamin:</p>
                                 <select class="form-control" name="jenkel" required>
-                                    <option value="Laki-Laki">Laki-Laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <?php
+                                    if ($currentUser->row()->jenkel == "Laki-Laki") echo "<option value='Laki-Laki' selected>Laki-Laki</option>";
+                                    else echo "<option value='Laki-Laki'>Laki-Laki</option>";
+
+                                    if ($currentUser->row()->jenkel == "Perempuan") echo "<option value='Perempuan' selected>Perempuan</option>";
+                                    else echo "<option value='Perempuan'>Perempuan</option>";	   
+                                    ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="telepon">Nomor Telepon:</label><br>
-                                <input type="number" name="telepon" class="telepon form-control" id="telepon" style="width: 400px" required>
+                                <input type="number" name="telepon" class="telepon form-control" id="telepon" style="width: 400px" value="<?php echo $currentUser->row()->telepon ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label><br>
-                                <input type="email" name="email" class="email form-control" id="email" style="width: 400px" required>
+                                <input type="email" name="email" class="email form-control" id="email" style="width: 400px" value="<?php echo $currentUser->row()->email ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="username">Username:</label><br>
-                                <input type="text" name="username" class="username form-control" id="username" required>
+                                <input type="text" name="username" class="username form-control" id="username" value="<?php echo $currentUser->row()->username ?>" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="position: relative">
                                 <label for="password">Kata Sandi:</label><br>
-                                <input type="password" name="password" class="password form-control" id="password" style="width: 400px" required>
+                                <input type="password" name="password" class="password form-control" id="password" style="width: 400px">
+                                <div style="position: absolute;right: 0;top: 100%; color: yellow">Kosongkan bila tidak ingin diubah</div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group unique">
                                 <label for="foto">Foto:</label><br>
-                                <input type="file" name="foto" class="form-control" id="foto" style="width: 400px" required>
+                                <div style="padding-bottom: 5px">
+                                <img src="<?php echo base_url(); ?>assets/img/<?php echo $currentUser->row()->foto ?>" width="50%" id="foto">
+                                </div>
+                                <input type="file" name="foto" class="form-control" style="width: 400px">
                             </div>
                             <br>
                             <p>Sudah Memiliki Akun ? <a href="<?php echo base_url(); ?>user" style="color: white;"><b>Login</b></a></p>
-                            <a href="<?php echo base_url(); ?>"><button type="button" class="btn btn-previous"><i class="fa fa-angle-left"></i> Kembali</button></a>
+                            <a href="<?php echo base_url() ?>"><button type="button" class="btn btn-previous"><i class="fa fa-angle-left"></i> Kembali</button></a>
                             <button type="button" class="btn btn-next">Berikutnya <i class="fa fa-angle-right"></i></button>
                         </fieldset>
                         
@@ -88,28 +97,27 @@
                             <h4>Alamat <span class="step">(Step 2 / 2)</span></h4>
                             <div class="form-group">
                                 <label for="kota">Kota:</label><br>
-                                <input type="text" name="kota" class="kota form-control" id="kota" required>
+                                <input type="text" name="kota" class="kota form-control" id="kota" value="<?php echo $currentUser->row()->kota ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="provinsi">Provinsi:</label><br>
-                                <input type="text" name="provinsi" class="provinsi form-control" id="provinsi" required>
+                                <input type="text" name="provinsi" class="provinsi form-control" id="provinsi" value="<?php echo $currentUser->row()->provinsi ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="negara">Negara:</label><br>
-                                <input type="text" name="negara" class="negara form-control" id="negara" required>
+                                <input type="text" name="negara" class="negara form-control" id="negara" value="<?php echo $currentUser->row()->negara ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="kodepos">Kode Pos:</label><br>
-                                <input type="number" name="kodepos" class="kodepos form-control" id="kodepos" style="width: 400px" required>
+                                <input type="number" name="kodepos" class="kodepos form-control" id="kodepos" style="width: 400px" value="<?php echo $currentUser->row()->kodepos ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat Pengiriman:</label><br>
-                                <textarea name="alamat" class="alamat form-control" id="alamat" required></textarea>
+                                <textarea name="alamat" class="alamat form-control" id="alamat" required><?php echo $currentUser->row()->alamat ?></textarea>
                             </div>
                             <br>
-                            <p>Sudah Memiliki Akun ? <a href="<?php echo base_url(); ?>user" style="color: white;"><b>Login</b></a></p>
                             <button type="button" class="btn btn-previous"><i class="fa fa-angle-left"></i> Kembali</button>
-                            <button type="submit" name="simpan" class="btn">Daftar</button>
+                            <button type="submit" name="simpan" class="btn">Edit</button>
                         </fieldset>
                         
                     </form>
