@@ -116,7 +116,11 @@ class Products_model extends CI_Model {
     }
 
     // get all transaction
-    function getAllTransaction(){
+    function getAllTransaction($id){
+        $arr = array(
+            'id_pembeli' => $id
+        );
+        $this->db->where($arr);
         return $this->db->get('transaksi');
     }
 

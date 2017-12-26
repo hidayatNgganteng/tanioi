@@ -154,7 +154,7 @@ class Product extends CI_Controller {
         $data['allProducts'] = $this->products_model->getAllProduct();
         $data['product_cart'] = $this->products_model->product_cart();
         $data['currentUser'] = $this->users_model->currentUser();
-        $data['getAllTransaction'] = $this->products_model->getAllTransaction();
+        $data['getAllTransaction'] = $this->products_model->getAllTransaction($this->users_model->currentUser()->row()->id);
         $this->load->view('product/product_transaction', $data);
     }
 

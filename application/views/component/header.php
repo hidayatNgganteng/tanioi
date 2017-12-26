@@ -22,7 +22,8 @@
                             <li><a href='<?php echo base_url(); ?>user/edit'>Edit Profil</a></li>
                             <li><a href="<?php echo base_url(); ?>user/logout">Logout</a></li>
                         </ul>
-                    </li> <?php
+                    </li>
+                    <li><a href="#"><?php echo $currentUser->row()->nama ?></a></li><?php
                 }else{ ?>
                     <li><a href="<?php echo base_url(); ?>user">Login</a></li> <?php
                 }
